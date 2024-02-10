@@ -7,7 +7,7 @@
     <meta name="author" content="pxdraft">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="keywords" content="Nebiyu - Portfolio">
+    <meta name="keywords" content="Nebiyu1 - Portfolio">
     <meta name="description" content="Nebiyu - Portfolio">
     <!-- title -->
     <title>Nebiyu - Portfolio </title>
@@ -24,11 +24,93 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css">
     <script src="https://cdn.jsdelivr.net/npm/lg-thumbnail@1.2.0/dist/lg-thumbnail.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css">
-
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 
     <!-- theme css -->
     <link href="assets/css/main.css" rel="stylesheet">
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var links = document.querySelectorAll('a[data-scroll-nav]');
+
+            links.forEach(function(link) {
+                link.addEventListener("click", function(e) {
+                    e.preventDefault();
+                    var targetId = this.getAttribute('href').substring(1);
+                    var targetElement = document.getElementById(targetId);
+
+                    if (targetElement) {
+                        var offsetTop = targetElement.offsetTop;
+                        window.scrollTo({
+                            top: offsetTop,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            window.addEventListener("scroll", function() {
+                var scrollPos = window.scrollY;
+
+                links.forEach(function(link) {
+                    var targetId = link.getAttribute('href').substring(1);
+                    var targetElement = document.getElementById(targetId);
+
+                    if (targetElement) {
+                        var elementTop = targetElement.offsetTop;
+                        var elementBottom = elementTop + targetElement.offsetHeight;
+
+                        if (elementTop <= scrollPos && elementBottom > scrollPos) {
+                            links.forEach(function(link) {
+                                link.classList.remove('active');
+                            });
+                            link.classList.add('active');
+                        } else {
+                            link.classList.remove('active');
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+    <script>
+        var $j = jQuery.noConflict();
+
+        $j(document).ready(function() {
+            var WEA = {};
+
+            WEA.MenuTogglerClose = function() {
+                $j("#mobile_toggle1").on('click', function() {
+                    $j(this).toggleClass('open');
+                    $j('.main-header').stop().toggleClass('menu-open menu-open-desk');
+                });
+
+                $j('.main-header a,  .hl_menu_close').on('click', function() {
+                    var toggle = $j('#mobile_toggle1').is(':visible');
+                    if (toggle) {
+                        $j('.main-header').removeClass('menu-open').removeClass('menu-open-desk');
+                        $j('#mobile_toggle1').removeClass('open');
+                    }
+                });
+            }
+
+            WEA.HeaderFixd = function() {
+                var HscrollTop = $j(window).scrollTop();
+                if (HscrollTop >= 100) {
+                    $j('body').addClass('fixed-header');
+                } else {
+                    $j('body').removeClass('fixed-header');
+                }
+            }
+
+            // Call your functions
+            WEA.MenuTogglerClose();
+            WEA.HeaderFixd();
+
+            // Additional JavaScript code can be added here
+        });
+    </script>
+
 
     <script>
         // On page load or when changing themes, best to add inline in `head` to avoid FOUC
@@ -56,13 +138,13 @@
             <a href="index.html#"><img src="assets/img/logo.svg" title="" alt=""></a>
         </div>
         <!-- Mobile Toggle -->
-        <button id="#mobile_toggle1" class="ml-auto mobile_toggle1 w-[40px] flex flex-col">
+        <button id="mobile_toggle1" class="ml-auto mobile_toggle1 w-[40px] flex flex-col">
             <span class="w-[25px] h-[2px] bg-slate-900 dark:bg-white inline-block"></span>
             <span class="w-[25px] h-[2px] bg-slate-900 dark:bg-white inline-block my-[5px]"></span>
             <span class="w-[25px] h-[2px] bg-slate-900 dark:bg-white inline-block"></span>
         </button>
     </div>
-    <!-- End Mobile Header -->
+
     <!-- Header -->
     <header class="main-header one-page-nav">
         <!-- Logo -->
@@ -83,14 +165,12 @@
                         <i class="far fa-address-card"></i>
                     </a>
                 </li>
-
                 <li>
                     <a class="nav-link" data-scroll-nav="3" href="#work">
                         <span>WORK</span>
                         <i class="fas fa-briefcase"></i>
                     </a>
                 </li>
-
                 <li>
                     <a class="nav-link" data-scroll-nav="5" href="#contactus">
                         <span>CONTACT</span>
@@ -102,11 +182,16 @@
         <!-- Theme Color Switch -->
         <div class="theme-color mt-auto">
             <button id="theme-toggle" type="button">
-                <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
                 </svg>
-                <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
+                <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+                        fill-rule="evenodd" clip-rule="evenodd"></path>
                 </svg>
             </button>
         </div>

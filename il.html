@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>neba sport </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="css.css"> -->
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <meta name="google-site-verification" content="--qhEw6lnWThZysBUcoHV9B1xo3XuLPnyR8yOOExyGo" />
+    <!-- Primary Meta Tags -->
+    <title>NEBA Sport Live Stream</title>
+
+</head>
+<style>
+    body {
+        background: linear-gradient(315deg, #02b9ff, #6f02ff, #02dfff, #02ffdd);
+        background-size: 240% 240%;
+        animation: gradient-animation 28s ease infinite;
+    }
+    
+    @keyframes gradient-animation {
+        0% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+    
+    .glass {
+        /* From https://css.glass */
+        background: rgba(255, 255, 255, 0);
+        border-radius: 16px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(9.9px);
+        -webkit-backdrop-filter: blur(9.9px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+    
+    .stream_cover {
+        margin: 40px;
+    }
+    
+    .video_cover {
+        position: relative;
+        padding-bottom: 56.25%;
+        /* 16:9 aspect ratio */
+        height: 0;
+        overflow: hidden;
+    }
+    
+    @media (max-width: 768px) {
+        .stream_cover {
+            margin: 10px;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .stream_cover {
+            margin: 5px;
+        }
+    }
+    
+    .glass {
+        /* From https://css.glass */
+        background: rgba(255, 255, 255, 0.19);
+        border-radius: 16px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(4.9px);
+        -webkit-backdrop-filter: blur(4.9px);
+        border: 1px solid rgba(255, 255, 255, 0.33);
+    }
+    
+    @media screen and (max-width: 768px) {
+        .glass {
+            /* From https://css.glass */
+            background: rgba(255, 255, 255, 0.28);
+            border-radius: 16px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(8.1px);
+            -webkit-backdrop-filter: blur(8.1px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+    }
+    
+    div.waves {
+        width: 100%;
+        bottom: 0;
+        /*height: 100%;*/
+        position: fixed;
+        z-index: 99;
+    }
+    
+    .tutorial-link {
+        font-family: sans-serif;
+        text-align: center;
+        color: #f3f3f3;
+    }
+    
+    .tutorial-link h2 {
+        background: rgb(255, 255, 255);
+        background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(0, 125, 255, 1) 100%);
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+    }
+    
+    .tutorial-link a {
+        text-decoration: none;
+        background: rgb(255, 255, 255);
+        background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(0, 125, 255, 1) 100%);
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+    }
+    
+    svg {
+        position: absolute;
+        width: 100%;
+        bottom: 0;
+        left: 0;
+        animation-name: move-left;
+        animation-duration: 4s;
+        animation-iteration-count: infinite;
+        animation-direction: alternate;
+    }
+    
+    .spacer {
+        height: 100px;
+        width: 100%;
+    }
+    
+    @keyframes example {
+        0% {
+            left: 0px;
+            top: 0px;
+        }
+        50% {
+            left: -2000px;
+            top: 200px;
+        }
+        100% {
+            left: 0px;
+            top: 0px;
+        }
+    }
+    
+    .card12 {
+        border-radius: 11px;
+        margin-right: auto !important;
+        margin-left: auto !important;
+    }
+    
+    .card-content {
+        max-height: 6vh;
+        height: 6%;
+        /* Set the height to 6% */
+        overflow: auto;
+    }
+    
+    .video-list-item {
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 8px;
+        border-bottom: 1px solid #ccc;
+    }
+    
+    .video-list-item:last-child {
+        border-bottom: none;
+    }
+    
+    .video-list-item:hover {
+        background-color: #f0f0f0;
+        /* Change to your desired hover background color */
+    }
+    
+    .video-list-item.active {
+        background-color: #a0aec0;
+        /* Change to your desired active background color */
+    }
+    
+    .loading-text {
+        color: #636b6f;
+    }
+    
+    .video-list {
+        list-style-type: none;
+        padding: 0;
+    }
+    
+    .video-cover {
+        margin-top: 4rem;
+    }
+    
+    .aspect-video {
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .video-title {
+        background-color: rgba(0, 0, 0, 0.5);
+        color: #fff;
+        padding: 0.5rem;
+        text-align: center;
+    }
+    
+    .nnn {
+        /* padding: 3rem!important; */
+        padding-bottom: 30rem;
+    }
+</style>
+</head>
+
+<body class="bg-gray-100 dark:bg-gray-800">
+
+    <div class="bg-indigo-100 py-5 md:py-12v stream_cover glass">
+        <div class="container px-4 mx-auto">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="mt-4 video-cover">
+                        <div id="video-container" class="aspect-video overflow-hidden">
+                            <video class="w-full h-full aspect-ratio-16/9 w-100 h-100 object-cover" controls id="video-player">
+                Your browser does not support the video tag.
+              </video>
+                        </div>
+                        <div class="video-title" id="video-title"></div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card text-center w-96 card12" style="height: 6vh;">
+                        <label for="countries_multiple" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select an option</label>
+                        <div class="fetch-data-container bg-white dark:bg-gray-700 rounded-lg shadow-md overflow-auto card-content nnn">
+
+                            <div class="video-list-container hidden">
+                                <ol class="video-list" id="video-list">
+                                    <!-- List items will be added dynamically with JavaScript -->
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script>
+        const apiUrl = "https://script.googleusercontent.com/macros/echo?user_content_key=IOPeDO-lT8XPEzQ3XdM7Fv6vSs9emxsOdqeHm2r56ROEqBFIyy7oYg4MYMq2dclA4884Jx2GiuWfqKjO8VL7HJMQIBH7Uqu2m5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnDL23sItwyjBGEZysqR2ydJKK_3AzqF7is5WHZPXfcKWx1tR0JjvXroUjvU3A1oi0sYnPW4z62Y_gE45ZLvWjwmZfYGPQnlXBdz9Jw9Md8uu&lib=M7bxgNxDU40HT7RPYe8CbFLhn504ITwgK";
+
+        const videoList = document.getElementById("video-list");
+        const videoPlayer = document.getElementById("video-player");
+        const videoTitleElement = document.getElementById("video-title");
+
+        // Fetch data from the API
+        fetch(apiUrl)
+            .then((response) => response.json())
+            .then((data) => {
+                // Remove duplicates from the data
+                const uniqueVideos = removeDuplicates(data, 'name');
+
+                // Add video items to the list
+                uniqueVideos.forEach(addVideoToList);
+            })
+            .catch((error) => console.error("Error fetching data:", error));
+
+        // Function to remove duplicate items from the array
+        function removeDuplicates(array, key) {
+            return array.filter((item, index, self) =>
+                index === self.findIndex((t) => (
+                    t[key] === item[key]
+                ))
+            );
+        }
+        // Function to add video items to the list
+        function addVideoToList(video) {
+            const listItem = document.createElement("li");
+            listItem.textContent = video.name;
+
+            // Check if the title should be highlighted
+            if (shouldHighlight(video.name)) {
+                listItem.style.backgroundColor = "#554FFF"; // Set the desired highlight background color
+                listItem.style.color = "white"; // Set the text color to contrast with the background
+            }
+
+            listItem.classList.add("video-list-item");
+            listItem.setAttribute("data-video-link", video.link);
+            listItem.addEventListener("click", function() {
+                playVideo(video.link, video.name);
+            });
+            videoList.appendChild(listItem);
+        }
+
+        // Function to determine whether to highlight based on specific keywords
+        function shouldHighlight(title) {
+            const keywordsToHighlight = [
+                "1-First Time Opening Illustrator ..gt",
+                "Working With Objects - Adobe Illus..gt",
+                "Everything About Appearance - Adob..gt",
+                "Everything About Drawing in Illust..gt",
+                "Working With Brushes - Adobe Illus..gt",
+                "Typography - Adobe Illustrator Meg..gt",
+                "Masking - Adobe Illustrator Mega C..gt",
+                "Few Advanced Techniques - Adobe Il..gt",
+                "Data Visualisation - Adobe Illustr..gt",
+                "Pattern - Adobe Illustrator Mega C..gt",
+                "Geometric Grid amp Artworks - Adobe ..gt",
+                "Isometric - Adobe Illustrator Mega..gt",
+                "Drawing From Images - Adobe Illust..gt",
+                "Export - Adobe Illustrator Mega Co..gt",
+                "Sell Your Artwork and Skills Onlin..gt",
+                "Preparing Illustrator Project for ..gt",
+                "End - Adobe Illustrator Mega Cours..gt",
+                "New Topic - Your Topic Goes Here..gt"
+            ];
+
+            return keywordsToHighlight.some(keyword => title.includes(keyword));
+        }
+
+        videoList.addEventListener("click", function(event) {
+            const clickedListItem = event.target.closest("li");
+            if (clickedListItem) {
+                // Remove active class from all list items
+                const listItems = videoList.getElementsByTagName("li");
+                for (const listItem of listItems) {
+                    listItem.classList.remove("active");
+                }
+
+                // Add active class to the clicked list item
+                clickedListItem.classList.add("active");
+
+                // Call playVideo with the clicked video link and title
+                const videoLink = clickedListItem.dataset.videoLink;
+                const videoTitle = clickedListItem.textContent;
+                playVideo(videoLink, videoTitle);
+            }
+        });
+
+        function playVideo(videoLink, videoTitle) {
+            videoPlayer.src = videoLink;
+            videoPlayer.load();
+            videoPlayer.play();
+
+            // Set the title dynamically
+            videoTitleElement.textContent = videoTitle;
+        }
+
+        // Function to play the next video in the list
+        function playNextVideo() {
+            const activeListItem = document.querySelector(".video-list-item.active");
+            if (activeListItem) {
+                const nextListItem = activeListItem.nextElementSibling;
+                if (nextListItem) {
+                    const videoLink = nextListItem.dataset.videoLink;
+                    const videoTitle = nextListItem.textContent;
+                    playVideo(videoLink, videoTitle);
+                }
+            }
+        }
+
+        videoPlayer.addEventListener("ended", playNextVideo);
+    </script>
+
+    <script type="text/javascript" src="//cdn.embed.ly/player-0.1.0.min.js"></script>
+
+</body>
+
+</html>

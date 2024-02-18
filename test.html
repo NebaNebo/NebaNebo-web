@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <title>Google Sheets API Test</title>
+
+    <!-- Add the script here -->
+    <script>
+        function addData() {
+            // Base URL of the Google Apps Script Web App
+            var baseUrl = 'https://script.google.com/macros/s/AKfycbyWI4MQr7kqlpvkuDr7Ug7LwKxoOy0L2NIdx0mRudVNJ4lqpdUvkZBqpKX_CmUko2vIrA/exec';
+
+            // Get form data
+            var name = encodeURIComponent(document.getElementById('name').value);
+            var email = encodeURIComponent(document.getElementById('email').value);
+            var subject = encodeURIComponent(document.getElementById('subject').value);
+            var description = encodeURIComponent(document.getElementById('message').value);
+
+            // Construct the full URL with query parameters
+            var fullUrl = `${baseUrl}?name=${name}&email=${email}&subject=${subject}&description=${description}`;
+            console.log(fullUrl)
+
+            // Use the fetch API to make the POST request
+            fetch(fullUrl, {
+                    method: 'POST', // Specify the method
+                    mode: 'no-cors', // This disables CORS checks
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                })
+                .then(response => response.text()) // Assuming the response is not JSON
+                .then(data => {
+                    console.log('Success:', data);
+                    document.getElementById('result').innerText = 'Data added successfully!';
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                    document.getElementById('result').innerText = 'Error adding data.';
+                });
+        }
+    </script>
+</head>
+
+<body class="bg-gray-100 h-screen flex items-center justify-center">
+
+    <div class="max-w-md w-full p-4 bg-white rounded-md shadow-md">
+        <h1 class="text-2xl font-bold mb-4">Google Sheets API Test</h1>
+
+        <form id="dataForm" class="mb-4">
+            <label for="name" class="block text-sm font-medium text-gray-600">Name:</label>
+            <input type="text" id="name" name="name" class="mt-1 p-2 border rounded-md w-full">
+
+            <label for="email" class="block mt-2 text-sm font-medium text-gray-600">Email:</label>
+            <input type="email" id="email" name="email" class="mt-1 p-2 border rounded-md w-full">
+
+            <label for="subject" class="block mt-2 text-sm font-medium text-gray-600">Subject:</label>
+            <input type="text" id="subject" name="subject" class="mt-1 p-2 border rounded-md w-full">
+
+            <label for="message" class="block mt-2 text-sm font-medium text-gray-600">Your Message:</label>
+            <textarea id="message" name="message" rows="4" class="mt-1 p-2 border rounded-md w-full"></textarea>
+
+            <div class="mt-4">
+                <button type="button" onclick="addData()" class="bg-blue-500 text-white px-4 py-2 rounded-md">send</button>
+            </div>
+        </form>
+
+        <div id="result" class="mt-4"></div>
+    </div>
+
+</body>
+
+</html>

@@ -120,6 +120,120 @@
             document.documentElement.classList.remove('dark')
         }
     </script>
+    <script>
+        var firstClick = true;
+
+        function addData() {
+            // Validate form fields
+            var name = document.getElementById('name').value;
+            var email = document.getElementById('email').value;
+            var subject = document.getElementById('subject').value;
+            var message = document.getElementById('message').value;
+
+            // Get the elements for error messages
+            var nameError = document.getElementById('nameError');
+            var emailError = document.getElementById('emailError');
+            var subjectError = document.getElementById('subjectError');
+            var messageError = document.getElementById('messageError');
+
+            // Clear previous error messages
+            clearErrorMessages();
+
+            // Check if fields are empty
+            if (!name) {
+                nameError.innerText = 'Please enter your name.';
+                return;
+            }
+
+            if (!email) {
+                emailError.innerText = 'Please enter your email.';
+                return;
+            }
+
+            if (!subject) {
+                subjectError.innerText = 'Please enter a subject.';
+                return;
+            }
+
+            if (!message) {
+                messageError.innerText = 'Please enter your message.';
+                return;
+            }
+
+            // Base URL of the Google Apps Script Web App
+            var baseUrl = 'https://script.google.com/macros/s/AKfycbyWI4MQr7kqlpvkuDr7Ug7LwKxoOy0L2NIdx0mRudVNJ4lqpdUvkZBqpKX_CmUko2vIrA/exec';
+
+            // Disable the button and show loading state
+            var button = document.getElementById('submitButton');
+            button.disabled = true;
+
+            if (firstClick) {
+                button.innerText = 'Sending Message...';
+                firstClick = false;
+            } else {
+                button.innerText = 'Done';
+                setTimeout(function() {
+                    button.innerText = 'Send Message';
+                    firstClick = true; // Reset firstClick for the next attempt
+                    // Clear validation error messages
+                    clearErrorMessages();
+                }, 1500); // Display "Done" for 1.5 seconds
+            }
+
+            // Get form data
+            var nameEncoded = encodeURIComponent(name);
+            var emailEncoded = encodeURIComponent(email);
+            var subjectEncoded = encodeURIComponent(subject);
+            var descriptionEncoded = encodeURIComponent(message);
+
+            // Get the full URL with query parameters
+            var fullUrl = `${baseUrl}?name=${nameEncoded}&email=${emailEncoded}&subject=${subjectEncoded}&description=${descriptionEncoded}`;
+
+            // Use the fetch API to make the POST request
+            fetch(fullUrl, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                })
+                .then(response => response.text())
+                .then(data => {
+                    console.log('Success:', data);
+                    document.getElementById('result').innerText = 'Thanks for your support!';
+                    // Clear input fields after successful submission
+                    document.getElementById('name').value = '';
+                    document.getElementById('email').value = '';
+                    document.getElementById('subject').value = '';
+                    document.getElementById('message').value = '';
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                    document.getElementById('result').innerText = 'Error adding data.';
+                })
+                .finally(() => {
+                    // Re-enable the button after the request is complete
+                    button.disabled = true;
+                    button.innerText = 'Done';
+
+                    setTimeout(function() {
+                        button.innerText = 'Send Message';
+                        button.classList.add('cursor-not-allowed');
+                        firstClick = true; // Reset firstClick for the next attempt
+                        // Clear validation error messages
+                        clearErrorMessages();
+                    }, 600); // Display "Done" for 1.5 seconds
+                });
+        }
+
+        // Function to clear validation error messages
+        function clearErrorMessages() {
+            document.getElementById('nameError').innerText = '';
+            document.getElementById('emailError').innerText = '';
+            document.getElementById('subjectError').innerText = '';
+            document.getElementById('messageError').innerText = '';
+        }
+    </script>
 
 
 </head>
@@ -228,9 +342,9 @@
             </div>
 
             <div class="hb-me" style="z-index:10;">
-                <script type="module" src="https://unpkg.com/@splinetool/viewer@1.0.51/build/spline-viewer.js"></script>
+                <!-- <script type="module" src="https://unpkg.com/@splinetool/viewer@1.0.51/build/spline-viewer.js"></script>
                 <spline-viewer url="https://prod.spline.design/9JBQezOyjMPn3C4m/scene.splinecode"></spline-viewer>
-            </div>
+            </div> -->
         </section>
         <!-- End Section -->
 
@@ -647,46 +761,54 @@
                             <div class="col-span-12 lg:col-span-7 xl:col-span-8">
                                 <div class="contact-form">
                                     <h4>Say Something</h4>
-                                    <form id="contact-form" method="POST">
+                                    <form id="contact-form" method="POST"><span id="result"></span>
                                         <div class="grid grid-cols-12 gap-5">
                                             <div class="col-span-12 md:col-span-6">
                                                 <div class="form-group">
                                                     <input name="Name" id="name" placeholder="Name *" class="form-control" type="text">
+                                                    <p id="nameError" class="text-red-500 text-xs italic"></p>
                                                 </div>
                                             </div>
                                             <div class="col-span-12 md:col-span-6">
                                                 <div class="form-group">
                                                     <input name="Email" id="email" placeholder="Email *" class="form-control" type="email">
+                                                    <p id="emailError" class="text-red-500 text-xs italic"></p>
                                                 </div>
                                             </div>
                                             <div class="col-span-12">
                                                 <div class="form-group">
                                                     <input name="Subject" id="subject" placeholder="Subject *" class="form-control" type="text">
+                                                    <p id="subjectError" class="text-red-500 text-xs italic"></p>
                                                 </div>
                                             </div>
                                             <div class="col-span-12">
                                                 <div class="form-group">
                                                     <textarea name="message" id="message" placeholder="Your message *" rows="5" class="form-control"></textarea>
+                                                    <p id="messageError" class="text-red-500 text-xs italic"></p>
                                                 </div>
                                             </div>
                                             <div class="col-span-12">
                                                 <div class="send">
-                                                    <button class="px-btn px-btn-white" onclick="send_mail()" type="button" value="Send"> send message</button>
+                                                    <button id="submitButton" type="button" class="px-btn px-btn-white" onclick="addData()">
+                                                        Send Message
+                                                    </button>
                                                 </div>
-                                                <span id="suce_message" class="text-success" style="display: none">Message Sent Successfully</span>
-                                                <span id="err_message" class="text-danger" style="display: none">Message Sending Failed</span>
+                                                <!-- Display success/error message here -->
+
                                             </div>
                                         </div>
-                                    </form>
+
                                 </div>
+                                </form>
                             </div>
-                            <div class="col-span-12">
-                                <div class="google-map border-[5px] border-white shadow-md">
-                                    <iframe class="w-full aspect-[16/6]" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d106044.36003620358!2d38.68342775213096!3d8.981614998365004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x164b85cef5ab402d%3A0x8467b6b037a24d49!2sAddis%20Ababa!5e0!3m2!1sen!2set!4v1707430060363!5m2!1sen!2set"
-                                        allowfullscreen=""></iframe>
-                                </div>
+                        </div><br><br><br>
+                        <div class="col-span-12">
+                            <div class="google-map border-[5px] border-white shadow-md">
+                                <iframe class="w-full aspect-[16/6]" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d106044.36003620358!2d38.68342775213096!3d8.981614998365004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x164b85cef5ab402d%3A0x8467b6b037a24d49!2sAddis%20Ababa!5e0!3m2!1sen!2set!4v1707430060363!5m2!1sen!2set"
+                                    allowfullscreen=""></iframe>
                             </div>
                         </div>
+                    </div>
                     </div>
                 </section>
                 <!-- End Contact us -->
@@ -700,9 +822,9 @@
                         <div class="grid grid-cols-12">
                             <div class="col-span-12 md:col-span-6 flex pb-3 md:pb-0">
                                 <div class="flex justify-center md:justify-start w-full">
-                                    <a class="text-gray-700 dark:text-white text-opacity-90 hover:text-theme-500 mr-5 text-[16px]" href="index.html#"><i class="fab fa-instagram"></i></a>
-                                    <a class="text-gray-700 dark:text-white text-opacity-90 hover:text-theme-500 mr-5 text-[16px]" href="index.html#"><i class="fab fa-linkedin-in"></i></a>
-                                    <a class="text-gray-700 dark:text-white text-opacity-90 hover:text-theme-500 mr-5 text-[16px]" href="index.html#"><i class="fab fa-telegram"></i></a>
+                                    <a class="text-gray-700 dark:text-white text-opacity-90 hover:text-theme-500 mr-5 text-[16px]" href="https://www.instagram.com/real_nebanebo/"><i class="fab fa-instagram"></i></a>
+                                    <a class="text-gray-700 dark:text-white text-opacity-90 hover:text-theme-500 mr-5 text-[16px]" href="https://www.linkedin.com/in/nebiyu-daniel-34782b239/"><i class="fab fa-linkedin-in"></i></a>
+                                    <a class="text-gray-700 dark:text-white text-opacity-90 hover:text-theme-500 mr-5 text-[16px]" href="https://t.me/Mr_NebaNebo"><i class="fab fa-telegram"></i></a>
                                 </div>
                             </div>
                             <div class="col-span-12 md:col-span-6 text-center md:text-right">

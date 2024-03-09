@@ -25,6 +25,10 @@
             /* Maintain aspect ratio and cover container */
             border-radius: 8px;
         }
+        
+        #loadingIndicator {
+            display: none;
+        }
     </style>
 </head>
 
@@ -32,55 +36,79 @@
 
     <div class="container mx-auto my-8 p-4 bg-white shadow-md rounded-md">
         <h1 class="text-2xl font-bold mb-4">Telegram Channel Scraper Demo</h1>
+
+        <!-- Input for custom channel username -->
+        <input type="text" id="channelUsernameInput" placeholder="Enter Channel Username" class="mb-4 p-2 rounded-md">
+
         <div id="postsContainer" class="flex flex-wrap -mx-4">
             <!-- Posts will be dynamically added here -->
         </div>
+
         <button id="loadMoreBtn" class="bg-blue-500 text-white px-4 py-2 rounded-md mt-4">Load More</button>
+
+        <!-- Loading indicator -->
+        <div id="loadingIndicator" class="text-center mt-4">
+            Loading...
+        </div>
     </div>
 
     <script>
         const postsContainer = document.getElementById('postsContainer');
         const loadMoreBtn = document.getElementById('loadMoreBtn');
-        let lastPostIdCache = null;
+        const loadingIndicator = document.getElementById('loadingIndicator');
+        const channelUsernameInput = document.getElementById('channelUsernameInput');
+
+        let latestPostId = null;
         let loading = false;
+        let loadedPostIds = [];
 
         async function fetchPosts() {
             if (loading) return;
             loading = true;
 
-            try {
-                // Construct the API endpoint based on whether lastPostIdCache is available
-                const endpoint = lastPostIdCache ?
-                    `/get_post/ethio_market_place?after=${lastPostIdCache - 1}` :
-                    '/get_posts/ethio_market_place';
+            // Show loading indicator
+            loadingIndicator.style.display = 'block';
 
+            const customChannelUsername = channelUsernameInput.value.trim();
+            const endpoint = latestPostId ?
+                `/get_posts/${customChannelUsername}?before=${latestPostId}&order=desc` :
+                `/get_posts/${customChannelUsername}?order=desc`;
+            try {
                 const response = await fetch(`https://telegram-channel-scraper-api.vercel.app/api/v2${endpoint}`);
                 const posts = await response.json();
 
                 if (posts.length > 0) {
-                    // Extract the new last post ID
-                    const newLastPostId = posts[posts.length - 1].id;
+                    // Sort posts in descending order based on ID
+                    posts.sort((a, b) => b.id - a.id);
 
-                    if (!lastPostIdCache) {
-                        // Initial load: Subtract 20 from the new last post ID and save it in cache
-                        lastPostIdCache = newLastPostId - 20;
+                    // Filter out repeated posts
+                    const uniquePosts = posts.filter(post => !loadedPostIds.includes(post.id));
+
+                    if (latestPostId) {
+                        // Load More: Update the latest post ID with the minimum post ID
+                        const minPostId = Math.min(...posts.map(post => post.id));
+                        latestPostId = minPostId;
                     } else {
-                        // Load More: Update the cache with the new last post ID
-                        lastPostIdCache = newLastPostId;
+                        // Initial load: Save the new latest post ID
+                        latestPostId = posts[0].id + 1;
                     }
 
-                    posts.forEach(post => {
+                    // Append unique posts to the container
+                    uniquePosts.forEach(post => {
                         const postElement = document.createElement('div');
                         postElement.className = 'post px-4';
                         postElement.innerHTML = `
-              <img src="${post.photos[0]}" alt="Post Image" class="max-w-full">
-              <p class="mt-2">${post.description}</p>
-            `;
+        <img src="${post.photos[0]}" alt="Post Image" class="max-w-full">
+        <p class="mt-2">${post.description}</p>
+      `;
                         postsContainer.appendChild(postElement);
+                        loadedPostIds.push(post.id);
                     });
 
                     loading = false;
                 } else {
+                    // No more posts
+                    window.removeEventListener('scroll', handleScroll);
                     loadMoreBtn.disabled = true;
                     loadMoreBtn.textContent = 'No More Posts';
                 }
@@ -88,12 +116,25 @@
                 console.error('Error fetching posts:', error);
                 loading = false;
             }
+
+            // Hide loading indicator
+            loadingIndicator.style.display = 'none';
+        }
+
+        function handleScroll() {
+            if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 1200) {
+                // Load more posts when the user is near the bottom
+                fetchPosts();
+            }
         }
 
         loadMoreBtn.addEventListener('click', fetchPosts);
 
         // Initial load
         fetchPosts();
+
+        // Add scroll event listener for infinite scrolling
+        window.addEventListener('scroll', handleScroll);
     </script>
 
 </body>

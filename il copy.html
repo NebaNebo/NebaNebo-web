@@ -247,8 +247,7 @@
 </style>
 </head>
 
-<body class="bg-gray-100 dark:bg-gray-800">
-
+<body>
     <div class="bg-indigo-100 py-5 md:py-12v stream_cover glass">
         <div class="container px-4 mx-auto">
             <div class="row">
@@ -256,21 +255,23 @@
                     <div class="mt-4 video-cover">
                         <div id="video-container" class="aspect-video overflow-hidden">
                             <video class="w-full h-full aspect-ratio-16/9 w-100 h-100 object-cover" controls id="video-player">
-                Your browser does not support the video tag.
-              </video>
+                                Your browser does not support the video tag.
+                            </video>
                         </div>
                         <div class="video-title" id="video-title"></div>
                     </div>
                     <button type="button" class="btn btn-primary">
                         Notifications <span class="badge badge-light">4</span>
-                      </button>
+                    </button>
                 </div>
 
                 <div class="col-md-4">
                     <div class="card text-center w-96 card12" style="height: 6vh;">
-                        <label for="countries_multiple" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select an option</label>
-                        <div class="fetch-data-container bg-white dark:bg-gray-700 rounded-lg shadow-md overflow-auto card-content nnn">
+                        <label for="folder-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select Video Folder:</label>
+                        <input type="file" id="folder-input" webkitdirectory directory multiple>
+                        <button onclick="loadVideos()" class="btn btn-primary mt-2">Load Videos</button>
 
+                        <div class="fetch-data-container bg-white dark:bg-gray-700 rounded-lg shadow-md overflow-auto card-content nnn">
                             <div class="video-list-container hidden">
                                 <ol class="video-list" id="video-list">
                                     <!-- List items will be added dynamically with JavaScript -->
@@ -281,128 +282,70 @@
                 </div>
             </div>
         </div>
-
     </div>
 
-
-
     <script>
-        const apiUrl = "https://script.googleusercontent.com/macros/echo?user_content_key=IOPeDO-lT8XPEzQ3XdM7Fv6vSs9emxsOdqeHm2r56ROEqBFIyy7oYg4MYMq2dclA4884Jx2GiuWfqKjO8VL7HJMQIBH7Uqu2m5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnDL23sItwyjBGEZysqR2ydJKK_3AzqF7is5WHZPXfcKWx1tR0JjvXroUjvU3A1oi0sYnPW4z62Y_gE45ZLvWjwmZfYGPQnlXBdz9Jw9Md8uu&lib=M7bxgNxDU40HT7RPYe8CbFLhn504ITwgK";
-
         const videoList = document.getElementById("video-list");
         const videoPlayer = document.getElementById("video-player");
         const videoTitleElement = document.getElementById("video-title");
+        const folderInput = document.getElementById("folder-input");
 
-        // Fetch data from the API
-        fetch(apiUrl)
-            .then((response) => response.json())
-            .then((data) => {
-                // Remove duplicates from the data
-                const uniqueVideos = removeDuplicates(data, 'name');
+        folderInput.addEventListener("change", loadVideos);
 
-                // Add video items to the list
-                uniqueVideos.forEach(addVideoToList);
-            })
-            .catch((error) => console.error("Error fetching data:", error));
+        function loadVideos() {
+            const files = folderInput.files;
 
-        // Function to remove duplicate items from the array
-        function removeDuplicates(array, key) {
-            return array.filter((item, index, self) =>
-                index === self.findIndex((t) => (
-                    t[key] === item[key]
-                ))
-            );
-        }
-        // Function to add video items to the list
-        function addVideoToList(video) {
-            const listItem = document.createElement("li");
-            listItem.textContent = video.name;
+            if (files.length > 0) {
+                videoList.innerHTML = ""; // Clear existing list
 
-            // Check if the title should be highlighted
-            if (shouldHighlight(video.name)) {
-                listItem.style.backgroundColor = "#554FFF"; // Set the desired highlight background color
-                listItem.style.color = "white"; // Set the text color to contrast with the background
+                for (const file of files) {
+                    if (file.name.endsWith(".mp4")) {
+                        const videoPath = URL.createObjectURL(file);
+                        const videoName = extractVideoName(file.webkitRelativePath);
+                        addVideoToList(videoName, videoPath);
+                    }
+                }
+            } else {
+                console.error("No videos selected");
             }
+        }
+
+        function extractVideoName(webkitRelativePath) {
+            const parts = webkitRelativePath.split('/');
+            return parts[parts.length - 1];
+        }
+
+        function addVideoToList(videoName, videoPath) {
+            const listItem = document.createElement("li");
+            listItem.textContent = videoName;
 
             listItem.classList.add("video-list-item");
-            listItem.setAttribute("data-video-link", video.link);
+            listItem.setAttribute("data-video-link", videoPath);
             listItem.addEventListener("click", function() {
-                playVideo(video.link, video.name);
+                playVideo(videoPath, videoName);
+                highlightSelectedVideo(listItem);
             });
             videoList.appendChild(listItem);
         }
 
-        // Function to determine whether to highlight based on specific keywords
-        function shouldHighlight(title) {
-            const keywordsToHighlight = [
-                "1-First Time Opening Illustrator ..gt",
-                "Working With Objects - Adobe Illus..gt",
-                "Everything About Appearance - Adob..gt",
-                "Everything About Drawing in Illust..gt",
-                "Working With Brushes - Adobe Illus..gt",
-                "Typography - Adobe Illustrator Meg..gt",
-                "Masking - Adobe Illustrator Mega C..gt",
-                "Few Advanced Techniques - Adobe Il..gt",
-                "Data Visualisation - Adobe Illustr..gt",
-                "Pattern - Adobe Illustrator Mega C..gt",
-                "Geometric Grid amp Artworks - Adobe ..gt",
-                "Isometric - Adobe Illustrator Mega..gt",
-                "Drawing From Images - Adobe Illust..gt",
-                "Export - Adobe Illustrator Mega Co..gt",
-                "Sell Your Artwork and Skills Onlin..gt",
-                "Preparing Illustrator Project for ..gt",
-                "End - Adobe Illustrator Mega Cours..gt",
-                "New Topic - Your Topic Goes Here..gt"
-            ];
-
-            return keywordsToHighlight.some(keyword => title.includes(keyword));
-        }
-
-        videoList.addEventListener("click", function(event) {
-            const clickedListItem = event.target.closest("li");
-            if (clickedListItem) {
-                // Remove active class from all list items
-                const listItems = videoList.getElementsByTagName("li");
-                for (const listItem of listItems) {
-                    listItem.classList.remove("active");
-                }
-
-                // Add active class to the clicked list item
-                clickedListItem.classList.add("active");
-
-                // Call playVideo with the clicked video link and title
-                const videoLink = clickedListItem.dataset.videoLink;
-                const videoTitle = clickedListItem.textContent;
-                playVideo(videoLink, videoTitle);
-            }
-        });
-
-        function playVideo(videoLink, videoTitle) {
-            videoPlayer.src = videoLink;
+        function playVideo(videoPath, videoName) {
+            videoPlayer.src = videoPath;
             videoPlayer.load();
             videoPlayer.play();
 
             // Set the title dynamically
-            videoTitleElement.textContent = videoTitle;
+            videoTitleElement.textContent = videoName;
         }
 
-        // Function to play the next video in the list
-        function playNextVideo() {
-            const activeListItem = document.querySelector(".video-list-item.active");
-            if (activeListItem) {
-                const nextListItem = activeListItem.nextElementSibling;
-                if (nextListItem) {
-                    const videoLink = nextListItem.dataset.videoLink;
-                    const videoTitle = nextListItem.textContent;
-                    playVideo(videoLink, videoTitle);
-                }
-            }
-        }
+        function highlightSelectedVideo(selectedItem) {
+            // Remove active class from all list items
+            const listItems = document.querySelectorAll(".video-list-item");
+            listItems.forEach(item => item.classList.remove("active"));
 
-        videoPlayer.addEventListener("ended", playNextVideo);
+            // Add active class to the clicked list item
+            selectedItem.classList.add("active");
+        }
     </script>
-
-    <script type="text/javascript" src="//cdn.embed.ly/player-0.1.0.min.js"></script>
 
 </body>
 

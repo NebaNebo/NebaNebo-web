@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud Storage API Demo</title>
+</head>
+
+<body>
+    <h1>Uploaded Files</h1>
+
+    <!-- Button to Fetch Uploaded Files -->
+    <button type="button" onclick="fetchUploadedFiles()">Fetch Uploaded Files</button>
+
+    <!-- Container to Display Uploaded Files -->
+    <div id="fileList"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        // Function to fetch and display uploaded files
+        function fetchUploadedFiles() {
+            const accessKey = '1979968037_413174'; // Replace with your access key
+
+            axios.get("https://unlimited-cloud-storage-api.vercel.app/api/getposts", {
+                    headers: {
+                        access_key: accessKey
+                    }
+                })
+                .then(function(response) {
+                    const fileList = document.getElementById('fileList');
+                    fileList.innerHTML = '';
+
+                    response.data.forEach(file => {
+                        const fileItem = document.createElement('div');
+                        fileItem.innerHTML = `
+            <p>ID: ${file.id}</p>
+            <p>Title: ${file.title}</p>
+            <p>Photo: <a href="${file.photo}">${file.photo}</a></p>
+            <p>Video: <a href="${file.video}">${file.video}</a></p>
+          `;
+                        fileList.appendChild(fileItem);
+                    });
+                })
+                .catch(function(error) {
+                    console.error('Error fetching uploaded files:', error);
+                });
+        }
+    </script>
+</body>
+
+</html>

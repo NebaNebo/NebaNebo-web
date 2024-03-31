@@ -320,6 +320,12 @@
                     </a>
                 </li>
                 <li>
+                    <a class="nav-link" data-scroll-nav="4" href="#blog">
+                        <span>BLOG</span>
+                        <i class="fas fa-blog"></i>
+                    </a>
+                </li>
+                <li>
                     <a class="nav-link" data-scroll-nav="5" href="#contactus">
                         <span>CONTACT</span>
                         <i class="fas fa-id-card-alt"></i>
@@ -844,59 +850,106 @@
                                 </div>
                             </div>
 
-
-
-
-
-
-
-
-
                             <!-- grid item -->
 
                 </section>
-
                 <section data-scroll-index="4" id="blog" class="section">
                     <div class="container">
                         <div class="title">
                             <h3>Latest Blog.</h3>
-                        </div>
-                        <div class="container mx-auto px-4 py-8">
-                            <!-- Your HTML content -->
-                            <div class="flex flex-wrap justify-center gap-10">
-                                <!-- Telegram Post Widget 1 (Always Visible) -->
-                                <div class="telegram-post-widget-container gap-10">
-                                    <script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-post="nebadesignn/87" data-width="50" data-userpic="false" data-color="" data-dark="1" data-dark-color="#FF9301"></script>
-                                </div>
+                            <h4>Latest post from my Telegram channel</h4>
 
-                                <!-- Hide the following widgets on mobile screens -->
-                                <div class="hidden1: flex flex-wrap justify-center gap-10">
-                                    <!-- Telegram Post Widget 2 -->
-                                    <div class="telegram-post-widget-container gap-10">
-                                        <script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-post="nebadesignn/86" data-width="50" data-userpic="false" data-color="" data-dark="1" data-dark-color="#FF9301"></script>
-                                    </div>
-                                    <!-- Telegram Post Widget 3 -->
-                                    <div class="telegram-post-widget-container gap-10">
-                                        <script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-post="nebadesignn/85" data-width="50" data-userpic="false" data-color="" data-dark="1" data-dark-color="#FF9301"></script>
-                                    </div>
-                                </div>
+                        </div>
+                        <div id="splide" class="splide">
+                            <div class="splide__track">
+                                <ul class="splide__list" id="post-list">
+                                    <!-- Each slide will be an <li> element -->
+                                </ul>
                             </div>
                         </div>
+                        <p>The post you discovered above is from my Telegram channel. If you like it, tap on the post and join my channel to get my latest thoughts.</p>
+                    </div>
 
-                        <!-- Additional CSS for responsiveness -->
-                        <style>
-                            @media (max-width: 1000px) {
-                                /* Hide the container with the class hidden md:flex on mobile screens */
-                                .hidden1\:flex {
-                                    display: none;
+                    <script>
+                        fetch("https://telegram-channel-scraper-api.vercel.app/api/v2/get_post/nebadesignn")
+                            .then(response => response.json())
+                            .then(data => {
+                                const posts = data.map(post => post.id);
+
+                                const maxId = Math.max(...posts);
+
+                                const postList = document.getElementById("post-list");
+                                const idsToAppend = [];
+
+                                let count = 0;
+                                for (let i = maxId; i >= 0; i--) {
+                                    if (posts.includes(i)) {
+                                        idsToAppend.push(i); // Store ID to append later
+                                        count++;
+                                        if (count === 3) break; // Stop after 3 IDs
+                                    }
                                 }
+
+                                // Append IDs as Telegram post widgets
+                                idsToAppend.forEach(id => {
+                                    const listItem = document.createElement("li");
+                                    listItem.className = "splide__slide";
+                                    const widgetContainer = document.createElement("div");
+                                    widgetContainer.className = "telegram-post-widget-container gap-12";
+                                    const scriptTag = document.createElement("script");
+                                    scriptTag.setAttribute("async", "");
+                                    scriptTag.setAttribute("src", `https://telegram.org/js/telegram-widget.js?22`);
+                                    scriptTag.setAttribute("data-telegram-post", `nebadesignn/${id}`);
+                                    scriptTag.setAttribute("data-width", "50");
+                                    scriptTag.setAttribute("data-userpic", "false");
+                                    scriptTag.setAttribute("data-color", "#FF9301");
+                                    scriptTag.setAttribute("data-dark", "1");
+                                    scriptTag.setAttribute("data-dark-color", "#FF9301");
+                                    widgetContainer.appendChild(scriptTag);
+                                    listItem.appendChild(widgetContainer);
+                                    postList.appendChild(listItem);
+                                });
+                            })
+                            .catch(error => console.error('Error fetching data:', error));
+                    </script>
+
+                    <style>
+                        #splide {
+                            width: 100%;
+                            gap: 200px;
+                        }
+                        
+                        .splide__track {
+                            gap: 200px;
+                        }
+                        
+                        .splide__slide {
+                            list-style: none;
+                            margin-bottom: 20px;
+                            gap: 200px;
+                            /* Add some bottom margin for better separation */
+                            display: inline-block;
+                            /* Align slides side by side */
+                            vertical-align: top;
+                            /* Align slides at the top */
+                            box-sizing: border-box;
+                        }
+                        
+                        @media (max-width: 600px) {
+                            /* Mobile mode */
+                            .splide__slide {
+                                width: calc(100% - 20px);
+                                /* Adjust slide width for mobile screens */
+                                margin-right: 0;
+                                /* Remove right margin */
                             }
-                        </style>
-                        <h4>What’s your story? Get in touch</h4>
-                        <p>Always available for freelancing if the right project comes along, Feel free to contact me.</p>
-                        <ul>
+                        }
+                    </style>
+
+
 
                 </section>
+
 
                 <!-- Contact us -->
                 <section data-scroll-index="5" id="contactus" class="section bg-gray">

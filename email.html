@@ -1,130 +1,208 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <title>Google Sheets API Test</title>
-</head>
-
-<body> -->
-<table border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout:fixed;background-color:#f9f9f9" id="bodyTable">
+<table width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background-color:#fff">
     <tbody>
         <tr>
-            <td style="padding-right:10px;padding-left:10px;" align="center" valign="top" id="bodyCell">
-                <table border="0" cellpadding="0" cellspacing="0" width="100%" class="wrapperWebview" style="max-width:600px">
+            <td>
+                <table align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background-color:#eaf0f6">
                     <tbody>
                         <tr>
-                            <td align="center" valign="top">
-                                <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                            <td>
+                                <table class="m_-2734187608660583639row-content m_-2734187608660583639stack" align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="color:#000;width:650px" width="650">
                                     <tbody>
                                         <tr>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <table border="0" cellpadding="0" cellspacing="0" width="100%" class="wrapperBody" style="max-width:600px">
-                    <tbody>
-                        <tr>
-                            <td align="center" valign="top">
-                                <table border="0" cellpadding="0" cellspacing="0" width="100%" class="tableCard" style="background-color:#fff;border-color:#e5e5e5;border-style:solid;border-width:0 1px 1px 1px;">
-                                    <tbody>
-                                        <tr>
-                                            <td style="background-color:#f46200;font-size:1px;line-height:3px" class="topBorder" height="3">&nbsp;</td>
-                                        </tr>
-                                        <tr>
-                                            <td style="padding-top: 15px;" align="center" valign="top" class="imgHero">
-                                                <!-- <h1>Nebadesign</h1> -->
-                                                <img src="https://raw.githubusercontent.com/NebaNebo/NebaNebo-web/main/assets/img/Asset%206%404x.png" style="max-height: 100px; width: auto; margin-top: -15px; transform: scale(0.6);">
-                                            </td>
-
-                                        </tr>
-
-
-                                        <tr>
-                                            <td style="  padding-bottom: px; padding-left: 20px; padding-right: 20px;" align="center" valign="top" class="mainTitle">
-                                                <h2 class="text" style="color:#000;font-family:Poppins,Helvetica,Arial,sans-serif;font-size:28px;font-weight:500;font-style:normal;letter-spacing:normal;line-height:36px;text-transform:none;text-align:center;padding:0;margin:0">Hi John Doe</h2>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="padding-bottom: 30px; padding-left: 20px; padding-right: 20px;" align="center" valign="top" class="subTitle">
-                                                <h4 class="text" style="color:#999;font-family:Poppins,Helvetica,Arial,sans-serif;font-size:16px;font-weight:500;font-style:normal;letter-spacing:normal;line-height:24px;text-transform:none;text-align:center;padding:0;margin:0">Thank you for taking the time to explore my portfolio!</h4>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="padding-left:20px;padding-right:20px" align="center" valign="top" class="containtTable ui-sortable">
-                                                <table border="0" cellpadding="0" cellspacing="0" width="100%" class="tableDescription" style="">
+                                            <td class="m_-2734187608660583639column" width="100%" style="font-weight:400;text-align:left;background-color:#fff;vertical-align:top;padding-top:0;padding-bottom:5px;border-top:0;border-right:0;border-bottom:0;border-left:0">
+                                                <table class="m_-2734187608660583639image_block" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation">
                                                     <tbody>
                                                         <tr>
-                                                            <td style="padding-bottom: 20px;" align="center" valign="top" class="description">
-                                                                <p class="text" style="color:#666;font-family:'Open Sans',Helvetica,Arial,sans-serif;font-size:14px;font-weight:400;font-style:normal;letter-spacing:normal;line-height:22px;text-transform:none;text-align:center;padding:0;margin:0">"Hey there! I'm Nebiyu, a passionate graphics designer ready to bring your ideas to life! I'm not just open to work; I'm eager to collaborate on exciting projects. Let's create something
-                                                                    amazing together!</p>
+                                                            <td style="width:100%;padding-right:0;padding-left:0">
+                                                                <div align="center" style="line-height:10px">
+                                                                    <a href="http://email.schoolofmotion.com/e/c/eyJlbWFpbF9pZCI6ImRnVGxzQU1BQU9UTEtlUExLUUdPb0Vyei16TzVjdXFHN0hnRlNYVT0iLCJocmVmIjoiaHR0cHM6Ly93d3cuc2Nob29sb2Ztb3Rpb24uY29tP3V0bV9jYW1wYWlnbj0lNUJMTVMlNUQrUmVnaXN0cmF0aW9uKy0rRnJlZStBY2NvdW50XHUwMDI2dXRtX2NvbnRlbnQ9Q29uZmlybStSZWdpc3RyYXRpb24rLStVcGRhdGVkXHUwMDI2dXRtX21lZGl1bT1lbWFpbF9hY3Rpb25cdTAwMjZ1dG1fc291cmNlPWN1c3RvbWVyLmlvIiwiaW50ZXJuYWwiOiJlNWIwMDMxNmMzYTcwMWU0Y2IyOSIsImxpbmtfaWQiOjM3NTgwOTAwfQ/66388344eaa20aae12d51d6423398d4dd7f983f832ba7cd156b74c4426c795b6"
+                                                                        style="outline:none" target="_blank" data-saferedirecturl="https://www.google.com/url?q=http://email.schoolofmotion.com/e/c/eyJlbWFpbF9pZCI6ImRnVGxzQU1BQU9UTEtlUExLUUdPb0Vyei16TzVjdXFHN0hnRlNYVT0iLCJocmVmIjoiaHR0cHM6Ly93d3cuc2Nob29sb2Ztb3Rpb24uY29tP3V0bV9jYW1wYWlnbj0lNUJMTVMlNUQrUmVnaXN0cmF0aW9uKy0rRnJlZStBY2NvdW50XHUwMDI2dXRtX2NvbnRlbnQ9Q29uZmlybStSZWdpc3RyYXRpb24rLStVcGRhdGVkXHUwMDI2dXRtX21lZGl1bT1lbWFpbF9hY3Rpb25cdTAwMjZ1dG1fc291cmNlPWN1c3RvbWVyLmlvIiwiaW50ZXJuYWwiOiJlNWIwMDMxNmMzYTcwMWU0Y2IyOSIsImxpbmtfaWQiOjM3NTgwOTAwfQ/66388344eaa20aae12d51d6423398d4dd7f983f832ba7cd156b74c4426c795b6&amp;source=gmail&amp;ust=1712212977623000&amp;usg=AOvVaw3S-j6BhlyOUcpJXPeBtq62"><img class="m_-2734187608660583639fullMobileWidth CToWUd" src="https://ci3.googleusercontent.com/meips/ADKq_NaWcP-TcfwcGxzWeNPVKibQd25G1LQXTPho0BwKVHDybH72kNPSpF2gT5AXAWma-ztsjPDXkyI-XHaf7pIbvTaCiNHA6g0C0_Hg9OiLYXEEmfa8jqTK2NpIPjONZeo9ThGSr8jDiJvhDp5N1v970UxhLPA35FYwwBa9QbtRSisBFToOTt_Q0i2r32K_eY2TN-epQfHQrbU=s0-d-e1-ft#https://userimg-bee.customeriomail.com/images/client-env-55397/SOM%20Generic/SOM%20Email%20Header%20-%20cutout%20transparent.png"
+                                                                            style="display:block;height:auto;border:0;width:650px;max-width:100%" width="650" alt="School of Motion" title="School of Motion" data-bit="iit"></a>
+                                                                </div>
                                                             </td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
-
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="font-size:1px;line-height:1px" height="20">&nbsp;</td>
-                                        </tr>
-                                        <tr>
-                                            <td align="center" valign="middle" style="padding-bottom: 40px;" class="emailRegards">
-                                                <!-- Image and Link // -->
-                                                <a href="https://nebadesign.me/" target="_blank" style="text-decoration:none;">
-                                                    <h1 style="color:#ff8827;font-family:Poppins,Helvetica,Arial,sans-serif;font-size:16px;font-weight:500;font-style:normal;letter-spacing:normal;line-height:24px;text-transform:none;text-align:center;padding:0;margin:0">Nebadesign.me</h1>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="padding-top: 15px;" align="center" valign="top" class="imgHero">
-                                                <!-- <h1>Nebadesign</h1> -->
-                                                <img src="https://raw.githubusercontent.com/NebaNebo/NebaNebo-web/main/assets/img/metatage.jpg" style="max-width: 100%; height: auto; margin-top: -25px; opacity: 0.80;">
                                             </td>
                                         </tr>
                                     </tbody>
                                 </table>
-
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background-color:#eaf0f6">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <table class="m_-2734187608660583639row-content m_-2734187608660583639stack" align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="color:#000;width:650px" width="650">
+                                    <tbody>
+                                        <tr>
+                                            <td class="m_-2734187608660583639column" width="100%" style="font-weight:400;text-align:left;background-color:#fff;vertical-align:top;padding-top:5px;padding-bottom:5px;border-top:0;border-right:0;border-bottom:0;border-left:0">
+                                                <table width="100%" border="0" cellpadding="20" cellspacing="0" role="presentation" style="word-break:break-word">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <div style="font-family:sans-serif">
+                                                                    <div style="font-family:Arial,Helvetica Neue,Helvetica,sans-serif;font-size:12px;color:#343434;line-height:1.5">
+                                                                        <p style="margin:0;font-size:18px"><span style="color:#343434;font-size:18px">Hey there!</span></p>
+                                                                        <p style="margin:0;font-size:18px">&nbsp;</p>
+                                                                        <p style="margin:0;font-size:18px">
+                                                                            You'll&nbsp;<em>never</em> believe this, but some people accidentally misspell their email address when they register. Right!??! I know!!!</p>
+                                                                        <p style="margin:0;font-size:18px">&nbsp;</p>
+                                                                        <p style="margin:0;font-size:18px">Well, we send&nbsp;<em>this</em> email for you to click to make sure that you're not one of those people. Because, if you were, you wouldn't be reading this.</p>
+                                                                        <p style="margin:0;font-size:18px">&nbsp;
+                                                                        </p>
+                                                                        <p style="margin:0;font-size:18px">Anyway, <strong>click that blue button</strong> and you'll be all set.</p>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </td>
                         </tr>
                     </tbody>
                 </table>
-                <table border="0" cellpadding="0" cellspacing="0" width="100%" class="wrapperFooter" style="max-width:600px">
+                <table align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background-color:#eaf0f6">
                     <tbody>
                         <tr>
-                            <td align="center" valign="top">
-                                <table border="0" cellpadding="0" cellspacing="0" width="100%" class="footer">
+                            <td>
+                                <table class="m_-2734187608660583639row-content m_-2734187608660583639stack" align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="color:#000;width:650px" width="650">
                                     <tbody>
                                         <tr>
-                                            <td style="padding-top:10px;padding-bottom:10px;padding-left:10px;padding-right:10px" align="center" valign="top" class="socialLinks">
+                                            <td class="m_-2734187608660583639column" width="100%" style="font-weight:400;text-align:left;background-color:#fff;vertical-align:top;padding-top:5px;padding-bottom:5px;border-top:0;border-right:0;border-bottom:0;border-left:0">
+                                                <table width="100%" border="0" cellpadding="10" cellspacing="0" role="presentation">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <div align="center">
 
-                                                <a href="https://www.linkedin.com/in/nebiyu-daniel-34782b239/" style="display: inline-block;" target="_blank" class="linkdin">
-                                                    <img alt="" border="0" src="https://img.icons8.com/?size=256&id=8808&format=png" style="height:auto;width:100%;max-width:40px;margin-left:2px;margin-right:2px" width="40">
-                                                </a>
-                                                <a href="https://t.me/Mr_NebaNebo" style="display: inline-block;" target="_blank" class="telegram">
-                                                    <img alt="" border="0" src="https://img.icons8.com/?size=50&id=lUktdBVdL4Kb&format=png" style="height:auto;width:100%;max-width:40px;margin-left:2px;margin-right:2px" width="40">
-                                                </a>
-                                                <a href="https://www.instagram.com/real_nebanebo/" style="display: inline-block;" target="_blank" class="instagram">
-                                                    <img alt="" border="0" src="https://img.icons8.com/?size=256&id=32309&format=png" style="height:auto;width:100%;max-width:40px;margin-left:2px;margin-right:2px" width="40">
-                                                </a>
-
+                                                                    <a href="http://email.schoolofmotion.com/e/c/eyJlbWFpbF9pZCI6ImRnVGxzQU1BQU9UTEtlUExLUUdPb0Vyei16TzVjdXFHN0hnRlNYVT0iLCJocmVmIjoiaHR0cHM6Ly93d3cuc2Nob29sb2Ztb3Rpb24uY29tL3JlZ2lzdGVyLWNvbmZpcm0_dG9rZW49ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmxiV0ZwYkNJNkltNWxZbWw1ZFdRNFFHZHRZV2xzTG1OdmJTSXNJbWxoZENJNk1UY3hNakE0TmpJME15d2laWGh3SWpveE56RXlNVEEyTkRBemZRLmFBNGc2NUdfRkNDVmxPNFN2c1dQSHVHQ0VXeUoxbzZlUnRMTjU1aTVaeDBcdTAwMjZ1dG1fY2FtcGFpZ249JTVCTE1TJTVEK1JlZ2lzdHJhdGlvbistK0ZyZWUrQWNjb3VudFx1MDAyNnV0bV9jb250ZW50PUNvbmZpcm0rUmVnaXN0cmF0aW9uKy0rVXBkYXRlZFx1MDAyNnV0bV9tZWRpdW09ZW1haWxfYWN0aW9uXHUwMDI2dXRtX3NvdXJjZT1jdXN0b21lci5pbyIsImludGVybmFsIjoiZTViMDAzMTZjM2E3MDFlNGNiMjkiLCJsaW5rX2lkIjozNzU3MDI0N30/76baed8c53635a7c2b212d4fb4ea6c72418625672a2149e4702a26c172c3f5c1"
+                                                                        style="text-decoration:none;display:inline-block;color:#ffffff;background-color:#404db2;border-radius:4px;width:auto;border-top:0px solid transparent;font-weight:400;border-right:0px solid transparent;border-bottom:0px solid transparent;border-left:0px solid transparent;padding-top:5px;padding-bottom:5px;font-family:Arial,Helvetica Neue,Helvetica,sans-serif;text-align:center;word-break:keep-all"
+                                                                        target="_blank" data-saferedirecturl="https://www.google.com/url?q=http://email.schoolofmotion.com/e/c/eyJlbWFpbF9pZCI6ImRnVGxzQU1BQU9UTEtlUExLUUdPb0Vyei16TzVjdXFHN0hnRlNYVT0iLCJocmVmIjoiaHR0cHM6Ly93d3cuc2Nob29sb2Ztb3Rpb24uY29tL3JlZ2lzdGVyLWNvbmZpcm0_dG9rZW49ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmxiV0ZwYkNJNkltNWxZbWw1ZFdRNFFHZHRZV2xzTG1OdmJTSXNJbWxoZENJNk1UY3hNakE0TmpJME15d2laWGh3SWpveE56RXlNVEEyTkRBemZRLmFBNGc2NUdfRkNDVmxPNFN2c1dQSHVHQ0VXeUoxbzZlUnRMTjU1aTVaeDBcdTAwMjZ1dG1fY2FtcGFpZ249JTVCTE1TJTVEK1JlZ2lzdHJhdGlvbistK0ZyZWUrQWNjb3VudFx1MDAyNnV0bV9jb250ZW50PUNvbmZpcm0rUmVnaXN0cmF0aW9uKy0rVXBkYXRlZFx1MDAyNnV0bV9tZWRpdW09ZW1haWxfYWN0aW9uXHUwMDI2dXRtX3NvdXJjZT1jdXN0b21lci5pbyIsImludGVybmFsIjoiZTViMDAzMTZjM2E3MDFlNGNiMjkiLCJsaW5rX2lkIjozNzU3MDI0N30/76baed8c53635a7c2b212d4fb4ea6c72418625672a2149e4702a26c172c3f5c1&amp;source=gmail&amp;ust=1712212977623000&amp;usg=AOvVaw14PF-Qv582BS8pxYBN3HXx"><span style="padding-left:20px;padding-right:20px;font-size:16px;display:inline-block;letter-spacing:normal"><span dir="ltr" style="word-break:break-word;line-height:32px">Complete Your Registration</span></span>
+                                                                    </a>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
                                             </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td style="font-size:1px;line-height:1px" height="30">&nbsp;</td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </td>
                         </tr>
+                    </tbody>
+                </table>
+                <table align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background-color:#eaf0f6">
+                    <tbody>
                         <tr>
-                            <td style="font-size:1px;line-height:1px" height="30">&nbsp;</td>
+                            <td>
+                                <table class="m_-2734187608660583639row-content m_-2734187608660583639stack" align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="color:#333;width:650px" width="650">
+                                    <tbody>
+                                        <tr>
+                                            <td class="m_-2734187608660583639column" width="100%" style="font-weight:400;text-align:left;background-color:#fff;vertical-align:top;padding-top:0;padding-bottom:0;border-top:0;border-right:0;border-bottom:0;border-left:0">
+                                                <table class="m_-2734187608660583639social_block" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td style="padding-bottom:10px;padding-left:10px;padding-right:10px;padding-top:15px;text-align:center">
+                                                                <div style="text-align:center">
+                                                                    <table class="m_-2734187608660583639social-table" width="168px" border="0" cellpadding="0" cellspacing="0" role="presentation" style="display:inline-block">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td style="padding:0 10px 0 0">
+                                                                                    <a href="http://email.schoolofmotion.com/e/c/eyJlbWFpbF9pZCI6ImRnVGxzQU1BQU9UTEtlUExLUUdPb0Vyei16TzVjdXFHN0hnRlNYVT0iLCJocmVmIjoiaHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL3NjaG9vbG9mbW90aW9uLz91dG1fY2FtcGFpZ249JTVCTE1TJTVEK1JlZ2lzdHJhdGlvbistK0ZyZWUrQWNjb3VudFx1MDAyNnV0bV9jb250ZW50PUNvbmZpcm0rUmVnaXN0cmF0aW9uKy0rVXBkYXRlZFx1MDAyNnV0bV9tZWRpdW09ZW1haWxfYWN0aW9uXHUwMDI2dXRtX3NvdXJjZT1jdXN0b21lci5pbyIsImludGVybmFsIjoiZTViMDAzMTZjM2E3MDFlNGNiMjkiLCJsaW5rX2lkIjozNzQ5NTMyMH0/38cddc8135041bebd88c52aab80afeafa8b2c1e0415af7bf61efcf829f281a87"
+                                                                                        target="_blank" data-saferedirecturl="https://www.google.com/url?q=http://email.schoolofmotion.com/e/c/eyJlbWFpbF9pZCI6ImRnVGxzQU1BQU9UTEtlUExLUUdPb0Vyei16TzVjdXFHN0hnRlNYVT0iLCJocmVmIjoiaHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL3NjaG9vbG9mbW90aW9uLz91dG1fY2FtcGFpZ249JTVCTE1TJTVEK1JlZ2lzdHJhdGlvbistK0ZyZWUrQWNjb3VudFx1MDAyNnV0bV9jb250ZW50PUNvbmZpcm0rUmVnaXN0cmF0aW9uKy0rVXBkYXRlZFx1MDAyNnV0bV9tZWRpdW09ZW1haWxfYWN0aW9uXHUwMDI2dXRtX3NvdXJjZT1jdXN0b21lci5pbyIsImludGVybmFsIjoiZTViMDAzMTZjM2E3MDFlNGNiMjkiLCJsaW5rX2lkIjozNzQ5NTMyMH0/38cddc8135041bebd88c52aab80afeafa8b2c1e0415af7bf61efcf829f281a87&amp;source=gmail&amp;ust=1712212977623000&amp;usg=AOvVaw3SGxDaWdOdXvUJqVSPcq08"><img src="https://ci3.googleusercontent.com/meips/ADKq_NZkummhh60cYBk8g1Qw8FlDoJYZHPiz6jbe0Dviei0RViCSXaJqMnJ0Xdgv3b3PreIoNw4a5icbZ50sDwVthijjqBK8oWdFlBU_NtyGCtoXQej5xSC8xrlPg2VEYQxYozc-wfo-2tOwfQ98d_fB0YhLjmFKcKTwB30cBRbTGg=s0-d-e1-ft#https://app-rsrc.getbee.io/public/resources/social-networks-icon-sets/t-circle-dark-gray/facebook@2x.png"
+                                                                                            width="32" height="32" alt="Facebook" title="Facebook" style="display:block;height:auto;border:0" class="CToWUd" data-bit="iit"></a>
+                                                                                </td>
+                                                                                <td style="padding:0 10px 0 0">
+                                                                                    <a href="http://email.schoolofmotion.com/e/c/eyJlbWFpbF9pZCI6ImRnVGxzQU1BQU9UTEtlUExLUUdPb0Vyei16TzVjdXFHN0hnRlNYVT0iLCJocmVmIjoiaHR0cHM6Ly90d2l0dGVyLmNvbS9TY2hvb2xPZk1vdGlvbj91dG1fY2FtcGFpZ249JTVCTE1TJTVEK1JlZ2lzdHJhdGlvbistK0ZyZWUrQWNjb3VudFx1MDAyNnV0bV9jb250ZW50PUNvbmZpcm0rUmVnaXN0cmF0aW9uKy0rVXBkYXRlZFx1MDAyNnV0bV9tZWRpdW09ZW1haWxfYWN0aW9uXHUwMDI2dXRtX3NvdXJjZT1jdXN0b21lci5pbyIsImludGVybmFsIjoiZTViMDAzMTZjM2E3MDFlNGNiMjkiLCJsaW5rX2lkIjozNzQ5NTMyMX0/c386be5d20ee25e421c2fccaf69b00e3806ac70961fbc43bbfdb3b2bdbfb219e"
+                                                                                        target="_blank" data-saferedirecturl="https://www.google.com/url?q=http://email.schoolofmotion.com/e/c/eyJlbWFpbF9pZCI6ImRnVGxzQU1BQU9UTEtlUExLUUdPb0Vyei16TzVjdXFHN0hnRlNYVT0iLCJocmVmIjoiaHR0cHM6Ly90d2l0dGVyLmNvbS9TY2hvb2xPZk1vdGlvbj91dG1fY2FtcGFpZ249JTVCTE1TJTVEK1JlZ2lzdHJhdGlvbistK0ZyZWUrQWNjb3VudFx1MDAyNnV0bV9jb250ZW50PUNvbmZpcm0rUmVnaXN0cmF0aW9uKy0rVXBkYXRlZFx1MDAyNnV0bV9tZWRpdW09ZW1haWxfYWN0aW9uXHUwMDI2dXRtX3NvdXJjZT1jdXN0b21lci5pbyIsImludGVybmFsIjoiZTViMDAzMTZjM2E3MDFlNGNiMjkiLCJsaW5rX2lkIjozNzQ5NTMyMX0/c386be5d20ee25e421c2fccaf69b00e3806ac70961fbc43bbfdb3b2bdbfb219e&amp;source=gmail&amp;ust=1712212977623000&amp;usg=AOvVaw2s0r7gMWRTDliwQPI7_wLx"><img src="https://ci3.googleusercontent.com/meips/ADKq_NafQ5UQ-Hrhv2fjN2wehf2WyLPzZmCnMDBRdhXl_KLWp7CKuA5D1a5TZMO6MZJVtF3SrWBIoDMAkcBFilMUv_8C0jau_n-vvMnrLU3Jh52BL_JX7Kttw4i-TBs0zbTb8EqwueUW5ARar3gP6sn-nF3za8tcF_oqdAZCL-P1=s0-d-e1-ft#https://app-rsrc.getbee.io/public/resources/social-networks-icon-sets/t-circle-dark-gray/twitter@2x.png"
+                                                                                            width="32" height="32" alt="Twitter" title="Twitter" style="display:block;height:auto;border:0" class="CToWUd" data-bit="iit"></a>
+                                                                                </td>
+                                                                                <td style="padding:0 10px 0 0">
+                                                                                    <a href="http://email.schoolofmotion.com/e/c/eyJlbWFpbF9pZCI6ImRnVGxzQU1BQU9UTEtlUExLUUdPb0Vyei16TzVjdXFHN0hnRlNYVT0iLCJocmVmIjoiaHR0cHM6Ly93d3cuaW5zdGFncmFtLmNvbS9zY2hvb2xvZm1vdGlvbi8_dXRtX2NhbXBhaWduPSU1QkxNUyU1RCtSZWdpc3RyYXRpb24rLStGcmVlK0FjY291bnRcdTAwMjZ1dG1fY29udGVudD1Db25maXJtK1JlZ2lzdHJhdGlvbistK1VwZGF0ZWRcdTAwMjZ1dG1fbWVkaXVtPWVtYWlsX2FjdGlvblx1MDAyNnV0bV9zb3VyY2U9Y3VzdG9tZXIuaW8iLCJpbnRlcm5hbCI6ImU1YjAwMzE2YzNhNzAxZTRjYjI5IiwibGlua19pZCI6NzgwNDU3OTV9/e55167715aff9b9b8e7a2b466498e5d6195cabeafe213157cadaf87a551af0f2"
+                                                                                        target="_blank" data-saferedirecturl="https://www.google.com/url?q=http://email.schoolofmotion.com/e/c/eyJlbWFpbF9pZCI6ImRnVGxzQU1BQU9UTEtlUExLUUdPb0Vyei16TzVjdXFHN0hnRlNYVT0iLCJocmVmIjoiaHR0cHM6Ly93d3cuaW5zdGFncmFtLmNvbS9zY2hvb2xvZm1vdGlvbi8_dXRtX2NhbXBhaWduPSU1QkxNUyU1RCtSZWdpc3RyYXRpb24rLStGcmVlK0FjY291bnRcdTAwMjZ1dG1fY29udGVudD1Db25maXJtK1JlZ2lzdHJhdGlvbistK1VwZGF0ZWRcdTAwMjZ1dG1fbWVkaXVtPWVtYWlsX2FjdGlvblx1MDAyNnV0bV9zb3VyY2U9Y3VzdG9tZXIuaW8iLCJpbnRlcm5hbCI6ImU1YjAwMzE2YzNhNzAxZTRjYjI5IiwibGlua19pZCI6NzgwNDU3OTV9/e55167715aff9b9b8e7a2b466498e5d6195cabeafe213157cadaf87a551af0f2&amp;source=gmail&amp;ust=1712212977623000&amp;usg=AOvVaw2Y66nCda-e2uS_xz7YtUDK"><img src="https://ci3.googleusercontent.com/meips/ADKq_NbBby0JSO9moYsZpnG4ni7CKR-EiLqjWvgz1DaKFhSrTSXVljBSsPC7ZrDWNsKNqC3_CwhgAQhwNbl1pZE-5-EfqsRx7WApxIr41fRMB8CMabPa-DvsECNLzJMhhhfvNa4Le26JueurIZ5Z-dWckK-8XSp7JZu2cOWcsR2E_n4=s0-d-e1-ft#https://app-rsrc.getbee.io/public/resources/social-networks-icon-sets/t-circle-dark-gray/instagram@2x.png"
+                                                                                            width="32" height="32" alt="Instagram" title="Instagram" style="display:block;height:auto;border:0" class="CToWUd" data-bit="iit"></a>
+                                                                                </td>
+                                                                                <td style="padding:0 10px 0 0">
+                                                                                    <a href="http://email.schoolofmotion.com/e/c/eyJlbWFpbF9pZCI6ImRnVGxzQU1BQU9UTEtlUExLUUdPb0Vyei16TzVjdXFHN0hnRlNYVT0iLCJocmVmIjoiaHR0cHM6Ly93d3cubGlua2VkaW4uY29tL3NjaG9vbC9zY2hvb2wtb2YtbW90aW9uLz91dG1fY2FtcGFpZ249JTVCTE1TJTVEK1JlZ2lzdHJhdGlvbistK0ZyZWUrQWNjb3VudFx1MDAyNnV0bV9jb250ZW50PUNvbmZpcm0rUmVnaXN0cmF0aW9uKy0rVXBkYXRlZFx1MDAyNnV0bV9tZWRpdW09ZW1haWxfYWN0aW9uXHUwMDI2dXRtX3NvdXJjZT1jdXN0b21lci5pbyIsImludGVybmFsIjoiZTViMDAzMTZjM2E3MDFlNGNiMjkiLCJsaW5rX2lkIjo3ODA0NDc3MH0/f9eb19d91118bea522d823cb6f1b90ad587cf109ef55bbd663c09fca121fb701"
+                                                                                        target="_blank" data-saferedirecturl="https://www.google.com/url?q=http://email.schoolofmotion.com/e/c/eyJlbWFpbF9pZCI6ImRnVGxzQU1BQU9UTEtlUExLUUdPb0Vyei16TzVjdXFHN0hnRlNYVT0iLCJocmVmIjoiaHR0cHM6Ly93d3cubGlua2VkaW4uY29tL3NjaG9vbC9zY2hvb2wtb2YtbW90aW9uLz91dG1fY2FtcGFpZ249JTVCTE1TJTVEK1JlZ2lzdHJhdGlvbistK0ZyZWUrQWNjb3VudFx1MDAyNnV0bV9jb250ZW50PUNvbmZpcm0rUmVnaXN0cmF0aW9uKy0rVXBkYXRlZFx1MDAyNnV0bV9tZWRpdW09ZW1haWxfYWN0aW9uXHUwMDI2dXRtX3NvdXJjZT1jdXN0b21lci5pbyIsImludGVybmFsIjoiZTViMDAzMTZjM2E3MDFlNGNiMjkiLCJsaW5rX2lkIjo3ODA0NDc3MH0/f9eb19d91118bea522d823cb6f1b90ad587cf109ef55bbd663c09fca121fb701&amp;source=gmail&amp;ust=1712212977623000&amp;usg=AOvVaw0VQYek8pIZNr_TRURflq-q">
+                                                                                        <img src="https://ci3.googleusercontent.com/meips/ADKq_NamQCRd1CLYfC-zwEUFkiImCwsoaMTZTmhtDA-rYUMiCkN99WNmB2WznZTLvFwd881Ls3Qxfay0-N4s7wO229upNgL0yjgDPDFpnWoonwI73UvlOfC8Q8PUmv48CjnQMIxWcfaJKf9PdpH7rmYpBo8UyoM6SqAG3VeZSBUl_Q=s0-d-e1-ft#https://app-rsrc.getbee.io/public/resources/social-networks-icon-sets/t-circle-dark-gray/linkedin@2x.png"
+                                                                                            width="32" height="32" alt="LinkedIn" title="LinkedIn" style="display:block;height:auto;border:0" class="CToWUd" data-bit="iit"></a>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <table width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="word-break:break-word">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td style="padding-left:10px;padding-right:10px;padding-top:10px">
+                                                                <div style="font-family:sans-serif">
+                                                                    <div style="font-size:12px;color:#ddd;line-height:1.2;font-family:Arial,Helvetica Neue,Helvetica,sans-serif">
+                                                                        <p style="margin:0;font-size:12px">&nbsp;</p>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <table class="m_-2734187608660583639image_block" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td style="width:100%;padding-right:0;padding-left:0">
+                                                                <div align="center" style="line-height:10px"><img class="m_-2734187608660583639big CToWUd" src="https://ci3.googleusercontent.com/meips/ADKq_NbYdjtIiTmjzA_jRnyZQK8ksXdEoJf3NJhNjQH65zocweHan8DKb8vRSCQfd-90Qe6wBP4dYuOHzy0OYgj1bj5mIZRhStaeJyWOf9056KrFMqXZqyCV1gK1zhHlXfj8eTD84fsHOOtUsR5Uy1Rmth_lujwXHCZBAvsvI8WCPIepfhf--ZG0ItFJGrgUdK0vrdhv2SndQ0RdYnhV8w=s0-d-e1-ft#https://userimg-bee.customeriomail.com/images/client-env-55397/SOM%20Generic/SOM%20footer%20-%20cutout-01FDG0VAMK2X27KQN8698QGSKM.png"
+                                                                        style="display:block;height:auto;border:0;width:650px;max-width:100%" width="650" data-bit="iit"></div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background-color:#eaf0f6">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <table class="m_-2734187608660583639row-content m_-2734187608660583639stack" align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="color:#000;width:650px" width="650">
+                                    <tbody>
+                                        <tr>
+                                            <td class="m_-2734187608660583639column" width="100%" style="font-weight:400;text-align:left;background-color:#eaf0f6;padding-right:10px;vertical-align:top;padding-top:0;padding-bottom:10px;border-top:0;border-right:0;border-bottom:0;border-left:0">
+                                                <table width="100%" border="0" cellpadding="10" cellspacing="0" role="presentation" style="word-break:break-word">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <div style="font-family:sans-serif">
+                                                                    <div style="font-size:12px;font-family:Arial,Helvetica Neue,Helvetica,sans-serif;color:#555;line-height:1.2">
+                                                                        <p style="margin:0;font-size:14px;text-align:left"><span style="font-size:12px;color:#000000"></span></p>
+                                                                        <p><a href="http://email.schoolofmotion.com/unsubscribe/dgTlsAMAAOTLKePLKQGOoErz-zO5cuqG7HgFSXU=" target="_blank" data-saferedirecturl="https://www.google.com/url?q=http://email.schoolofmotion.com/unsubscribe/dgTlsAMAAOTLKePLKQGOoErz-zO5cuqG7HgFSXU%3D&amp;source=gmail&amp;ust=1712212977623000&amp;usg=AOvVaw1p2Xg0FOr7LN2sQou0LgcB">unsubscribe</a></p>
+                                                                        <p></p>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -132,6 +210,3 @@
         </tr>
     </tbody>
 </table>
-</body>
-
-</html>

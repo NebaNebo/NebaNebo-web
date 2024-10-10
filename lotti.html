@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Football Score Animation</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+
+    <div class="text-center">
+        <!-- Lottie animation container -->
+        <div class="w-48 h-48 mx-auto mb-5 flex items-center justify-center">
+            <div id="score-container"></div>
+            <span id="num" class="text-5xl font-poppins font-semibold text-[#3b3b3bd4] px-2 bg-[#FF8989] scale-70"></span>
+        </div>
+
+
+        <!-- Buttons to change score and reset -->
+        <div class="space-x-4">
+            <button id="change-score" class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+                Change Score
+            </button>
+            <button id="reset-score" class="px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition">
+                Reset Score
+            </button>
+        </div>
+    </div>
+
+    <!-- Lottie animation library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.7.4/lottie.min.js"></script>
+    <script>
+        // Load the Lottie animation into the #score-container div
+        var animation = lottie.loadAnimation({
+            container: document.getElementById('score-container'), // the DOM element where the animation will play
+            renderer: 'svg',
+            loop: false, // Animation will play once
+            autoplay: false, // Do not autoplay on page load
+            path: 'arsdata.json' // Path to the Lottie JSON file
+        });
+
+        // Current score tracker
+        let currentScore = 0;
+
+        // Display initial score
+        document.getElementById('num').textContent = currentScore;
+
+        // Button click event to trigger score change and animation
+        document.getElementById('change-score').addEventListener('click', function() {
+            // Increment the score
+            currentScore++;
+
+            // Update score display after 0.2 seconds (to give time for animation)
+            setTimeout(() => {
+                document.getElementById('num').textContent = currentScore;
+            }, 400);
+
+            // Play the Lottie animation from the start
+            animation.goToAndPlay(0, true);
+
+            // Optional: Display current score in the console
+            console.log("Current score:", currentScore);
+        });
+
+        // Reset button functionality
+        document.getElementById('reset-score').addEventListener('click', function() {
+            // Reset the score to 0
+            currentScore = 0;
+
+            // Update the score display after 0.2 seconds
+            setTimeout(() => {
+                document.getElementById('num').textContent = currentScore;
+            }, 200);
+
+            // Play the Lottie animation from the start
+            animation.goToAndPlay(0, true);
+
+            console.log("Score reset:", currentScore);
+        });
+    </script>
+</body>
+
+</html>

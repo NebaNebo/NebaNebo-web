@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Key Check</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-gray-100 h-screen flex items-center justify-center">
+    <div class="max-w-md w-full bg-white rounded-lg shadow-md p-6">
+        <h2 class="text-xl font-semibold text-gray-700 text-center mb-4">telesun playground</h2>
+
+        <!-- Input Form -->
+        <form id="apiForm" class="space-y-4">
+            <!-- API Key Input -->
+            <div>
+                <label for="apiKey" class="block text-sm font-medium text-gray-700">Enter bot token </label>
+                <input type="text" id="apiKey" name="apiKey" class="mt-1 p-2 block w-full border rounded-md focus:ring-indigo-500 focus:border-indigo-500" placeholder="API Key" required>
+            </div>
+            <!-- Command Input -->
+            <div>
+                <label for="command" class="block text-sm font-medium text-gray-700">Enter Command</label>
+                <input type="text" id="command" name="command" class="mt-1 p-2 block w-full border rounded-md focus:ring-indigo-500 focus:border-indigo-500" placeholder="Command">
+            </div>
+            <!-- Message Input -->
+            <div>
+                <label for="message" class="block text-sm font-medium text-gray-700">Enter your bot's reply</label>
+                <input type="text" id="message" name="message" class="mt-1 p-2 block w-full border rounded-md focus:ring-indigo-500 focus:border-indigo-500" placeholder="Message">
+            </div>
+            <!-- Code Run Checkbox -->
+            <div class="flex items-center">
+                <input type="checkbox" id="runCode" name="runCode" class="h-4 w-4 text-indigo-600 border-gray-300 rounded">
+                <label for="runCode" class="ml-2 block text-sm text-gray-700">Run Code</label>
+            </div>
+
+            <button type="submit" id="submitButton" class="w-full py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700">Submit</button>
+        </form>
+
+        <!-- Response Display -->
+        <div id="response" class="hidden mt-4 p-3 rounded-md bg-red-50 text-red-700 font-medium">
+            Invalid API key.
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('apiForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const apiKey = document.getElementById('apiKey').value;
+            const command = document.getElementById('command').value;
+            const message = document.getElementById('message').value;
+            const runCode = document.getElementById('runCode').checked ? "true" : "true";
+
+            // Construct URL with additional parameters
+            const url = `https://script.google.com/macros/s/AKfycbx4inPQt34gIYMIcO27Kkb8rh0HSYcgYVm6kT9NNAvZXM1L_0kl3_TKIDyzsyvF6-JHmQ/exec?apikey=${apiKey}&action=runFunction&command=${command}&message=${message}&runCode=${runCode}`;
+
+            const submitButton = document.getElementById('submitButton');
+            submitButton.textContent = 'Loading...'; // Change button text to "Loading..."
+
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+
+                // Check for invalid API key response
+                if (data.error && data.error === 'Invalid') {
+                    document.getElementById('response').classList.remove('hidden');
+                } else {
+                    document.getElementById('response').classList.add('hidden'); // Hide error if valid
+                    console.log(data); // Log full response data
+                    alert(JSON.stringify(data, null, 2)); // Show JSON response in alert
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            } finally {
+                submitButton.textContent = 'Submit'; // Reset button text to "Submit"
+            }
+        });
+    </script>
+</body>
+
+</html>
